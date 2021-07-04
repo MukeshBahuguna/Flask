@@ -1,0 +1,39 @@
+{% extends 'admin/master.html' %}
+
+{%block body%}
+
+   {% if check %}
+      <div class="row pad">
+         <div class="col-lg-12">
+            <div class="panel panel-default">
+               <div class="panel-body text-center">
+                  <h3 class="bold"><i class="glyphicon glyphicon-dashboard"></i> Admin Dashboard</h3>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-12" >
+            <ul class="summary" >
+               <li class="">Total Users  <span class="badge">{{users}}</span></li>
+               <li class="">Total Todo's  <span class="badge">{{todos}}</span></li>
+                  
+            </ul>
+         </div>
+      </div>
+   {% endif %}
+   
+
+   {% macro menu_links(links=None) %}
+   {% if links is none %}{% set links = admin_view.admin.menu_links() %}{% endif %}
+   {% for item in links %}
+      {% if item.is_accessible() and item.is_visible() %}
+         <li>
+         <a href="{{ item.get_url() }}">{{ menu_icon(item) }}{{ item.name }}</a>
+         </li>
+      {% endif %}
+   {% endfor %}
+   {% endmacro %}
+   
+
+   
+
+{% endblock %}

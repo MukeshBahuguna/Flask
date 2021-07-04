@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}  
+
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.todo %}
+        <li class="list-group-item" >
+            <h4>{{note.data}} </h4>
+            <!-- <h7>Date & Time: {{note.date}}</h7> -->
+            <br>
+            <div align=right >
+                <form method="POST" action="./update" class="form-inline" >
+                        <input type="hidden"  class="form-control" value="{{note.data}}"  name="oldnote">
+                        <input type="text"   class="form-control" value="{{note.data}}"  name="newnote">
+                        <input type="submit" class="btn btn-primary"  value="Update">
+                </form>
+            </div>
+        <div align=center >   
+        <button type="button" class="btn btn-danger" onClick="deleteNote({{note.id}})"> <!--bit of a js --go to index.js-->
+            Delete</button>
+        </div>
+        </li>
+    {% endfor %}
+</ul>
+
+    <form method="POST">
+    <textarea name="note" id="note" class="form-control"></textarea>
+        <br>
+        <div align="center">
+            <button type="submit" class="btn btn-primary"> Add Note </button>
+        </div>
+    </form>
+
+{% endblock %}
+    
