@@ -1,4 +1,0 @@
-1> ***If You want to login as an admin then click on login button on top right corner***
-2> ***Fill in the details of the dummy admin class inside models.py file (at the bottom)***
-
-3>Also I wanted some help regarding certain stuff if it's possible then I would love to have a conversation with any of you guys :)
