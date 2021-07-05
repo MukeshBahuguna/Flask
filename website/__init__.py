@@ -21,14 +21,14 @@ def create_app():
     from .views import views
     from .auth import auth
     
-    from .models import User,Todo,myModelView,LoginMenuLink,LogoutMenuLink,MyHomeView
+    from .models import User,Todo,MyHomeView#,myModelView,LoginMenuLink,LogoutMenuLink
     create_database(app)
     # create_admin() #this was here to create an admin 
     admin=Admin(app,name="Admin Dashboard",index_view=MyHomeView(),template_mode="bootstrap3")
-    admin.add_view(myModelView(User,db.session))
-    admin.add_view(myModelView(Todo,db.session))
-    admin.add_link(LogoutMenuLink(name='Logout', category='', url="/adminlogout"))
-    admin.add_link(LoginMenuLink(name='Login', category='', url="/adminlogin"))
+    # admin.add_view(myModelView(User,db.session))
+    # admin.add_view(myModelView(Todo,db.session))
+    # admin.add_link(LogoutMenuLink(name='Logout', category='', url="/adminlogout"))
+    # admin.add_link(LoginMenuLink(name='Login', category='', url="/adminlogin"))
 
 
     login_manager=LoginManager()

@@ -2,7 +2,7 @@ from flask import Blueprint,render_template,url_for,request,flash,redirect,url_f
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user , login_required, logout_user ,current_user 
-from .models import User,Todo,Admins,myModelView
+from .models import User,Todo,Admins#,myModelView
 from flask_admin.contrib.sqla import ModelView
 #create blueprints
 
@@ -10,7 +10,6 @@ auth=Blueprint('auth', __name__)
 
 @auth.route('/login',methods=["GET","POST"])
 def login():
-    myModelView.b=False
     if request.method=="POST":
         email=request.form.get('email')
         password=request.form.get('password')
@@ -28,27 +27,27 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-@auth.route('/adminlogin',methods=["GET","POST"])
-def adminlogin():
-    if request.method=="POST":
-        name=request.form.get('name')
-        password=request.form.get('password')
+# @auth.route('/adminlogin',methods=["GET","POST"])
+# def adminlogin():
+#     if request.method=="POST":
+#         name=request.form.get('name')
+#         password=request.form.get('password')
 
-        admin= Admins.query.filter_by(name=name).first()
-        if admin:
-            if admin.password==password:
-                myModelView.b=True
-                return redirect('/admin')
-            else:
-                return "Wrong Password Admin-san!!"
-        else:
-            return "You are not authorized!"
-    return render_template("opadmin.html")
+#         admin= Admins.query.filter_by(name=name).first()
+#         if admin:
+#             if admin.password==password:
+#                 myModelView.b=True
+#                 return redirect('/admin')
+#             else:
+#                 return "Wrong Password Admin-san!!"
+#         else:
+#             return "You are not authorized!"
+#     return render_template("opadmin.html")
 
-@auth.route('/adminlogout',methods=["GET","POST"])
-def adminlogout():
-    myModelView.b=False
-    return redirect('/admin')
+# @auth.route('/adminlogout',methods=["GET","POST"])
+# def adminlogout():
+#     myModelView.b=False
+#     return redirect('/admin')
  
 @auth.route('/logout')
 @login_required
@@ -58,7 +57,6 @@ def logout():
 
 @auth.route('/signup',methods=["GET","POST"])
 def signup():
-    myModelView.b=False
     if request.method=='POST':
         email=request.form.get('email')
         firstname=request.form.get('firstname')

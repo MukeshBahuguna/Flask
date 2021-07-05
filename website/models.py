@@ -28,26 +28,26 @@ class Admins(db.Model,UserMixin):
     name=db.Column(db.String(150),unique=True)
     password=db.Column(db.String(150))
 
-class myModelView(ModelView):
-    b=False 
-    def is_accessible(self):
-        return myModelView.b
+# class myModelView(ModelView):
+#     b=False 
+#     def is_accessible(self):
+#         return myModelView.b
 
-class LoginMenuLink(MenuLink):
-    def is_accessible(self):
-        return not myModelView.b
+# class LoginMenuLink(MenuLink):
+#     def is_accessible(self):
+#         return not myModelView.b
 
-class LogoutMenuLink(MenuLink):
-    def is_accessible(self):
-        return myModelView.b            
+# class LogoutMenuLink(MenuLink):
+#     def is_accessible(self):
+#         return myModelView.b            
 
 class MyHomeView(AdminIndexView):
     @expose('/')
     def index(self):
-        check=myModelView.b
+        # check=myModelView.b
         users=User.query.count()
         todos=Todo.query.count()
-        return self.render('admin/index.html', check=check, users=users, todos=todos)
+        return self.render('admin/index.html', users=users, todos=todos)
 
 # Also, you can change the root url from /admin to / with the following:
 
