@@ -29,7 +29,6 @@ class Admins(db.Model,UserMixin):
     password=db.Column(db.String(150))
 
 class myModelView(ModelView):
-    print(current_user)
     b=False 
     def is_accessible(self):
         return myModelView.b
