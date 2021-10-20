@@ -18,7 +18,7 @@ def home():
         else:
             if check is not None:
                 if check.data==note:
-                    pass# I could have written ""if check is None:"" here after this!! 
+                    pass# I could have written ""if check is None:"" here after this!! for flashing and stuff
             else:
                 new_note=Todo(data=note, user_id=current_user.id)
                 db.session.add(new_note)
@@ -37,13 +37,16 @@ def delete_note():
             db.session.commit()
     return jsonify({})
 
-@views.route("/update", methods=["POST"])
+@views.route("/update", methods=["GET","POST"])
 def update():
-    newnote = request.form.get("newnote")
-    oldnote = request.form.get("oldnote")
-    note = Todo.query.filter_by(data=oldnote).first()
-    note.data = newnote
-    db.session.commit()
-    return redirect("/")
+    if request.method=="POST":
+        oldnote = request.form.get("oldnote")
+        newnote = request.form.get("newnote")
+        note = Todo.query.filter_by(data=oldnote).first()
+        note.data = newnote
+        db.session.commit()
+        return redirect("/")
+
+    return render_template("update.html",user=current_user)
     
 

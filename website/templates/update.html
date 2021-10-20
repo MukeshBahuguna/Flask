@@ -1,0 +1,23 @@
+{% extends "base.html" %}  
+
+{% block title %}  Update Page {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="./static/main.css">  
+
+<div class="forms">
+    <div class="space">
+        <h3 > Update Todo </h3>
+    </div>
+    <div class="form_space">
+    {% for note in user.todo %}
+        <form  class="main_form" method="POST" action="./update" >
+            <input type="hidden"  class="form-control" value="{{note.data}}"  name="oldnote">
+            <input type="text"   class="form-control" value="{{note.data}}"  name="newnote">
+            <input type="submit" class="btn btn-primary"  value="Update">
+        </form>
+        <br>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

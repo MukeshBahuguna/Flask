@@ -12,7 +12,7 @@ class Todo(db.Model):
     id =db.Column(db.Integer ,primary_key=True)
     data=db.Column(db.String(100000))
     date=db.Column(db.DateTime(timezone=True),default=func.now())
-    user_id=db.Column(db.Integer,db.ForeignKey('user.id')) # one to many relationship 1 user to many todo's in small case
+    user_id=db.Column(db.Integer,db.ForeignKey('user.id',ondelete='CASCADE')) # one to many relationship 1 user to many todo's in small case
 
 
 class User(db.Model,UserMixin): 
@@ -20,13 +20,21 @@ class User(db.Model,UserMixin):
     email=db.Column(db.String(150),unique=True)
     password=db.Column(db.String(150))
     firstname=db.Column(db.String(150))
-    todo= db.relationship('Todo')# in capital case (name case sensitive here.)
+    todo= db.relationship('Todo',backref="user", passive_deletes=True)# in capital case (name case sensitive here.)
     # to add a column you can just write *********-->engine/connection.execute('alter table table_name add column column_name String')
 
 class Admins(db.Model,UserMixin):
     id=db.Column(db.Integer ,primary_key=True)
     name=db.Column(db.String(150),unique=True)
     password=db.Column(db.String(150))
+
+class MyHomeView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        # check=myModelView.b
+        users=User.query.count()
+        todos=Todo.query.count()
+        return self.render('admin/index.html', users=users, todos=todos)
 
 # class myModelView(ModelView):
 #     b=False 
@@ -41,13 +49,7 @@ class Admins(db.Model,UserMixin):
 #     def is_accessible(self):
 #         return myModelView.b            
 
-class MyHomeView(AdminIndexView):
-    @expose('/')
-    def index(self):
-        # check=myModelView.b
-        users=User.query.count()
-        todos=Todo.query.count()
-        return self.render('admin/index.html', users=users, todos=todos)
+
 
 # Also, you can change the root url from /admin to / with the following:
 

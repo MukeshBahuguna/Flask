@@ -1,0 +1,48 @@
+
+.d{
+    margin-top: 20px;
+}
+
+.row{
+    display:flex;
+    flex-flow: row nowrap;
+        
+    /* border: 3px solid rgb(8, 152, 248); */
+    /* padding: 10px 5px; */
+    /* justify-content:center; */
+
+}
+
+.text {
+   
+    flex-basis: 85%;
+    word-wrap: break-word;
+    overflow:auto;
+     /* border: .5px solid rgb(243, 9, 9); */
+    /* padding: 10px 5px; */
+    /* margin-left: 400px; */
+    
+ 
+}
+.btn-toolbar2{
+    
+    flex-basis: 15%;
+    text-align: end; 
+        /* justify-content: space-between;*/
+}
+
+.forms{
+    text-align: center;
+}
+.form_space{
+    margin-top: 30px;
+}
+
+input{
+    margin-top: 5px;
+}
+
+.header{
+    text-align: center;
+    color: rgb(8, 152, 248);
+}

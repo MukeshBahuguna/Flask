@@ -4,27 +4,26 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
+<link rel="stylesheet" type="text/css" href="./static/main.css">  
+
+<h1 class="header">Notes</h1>
+<ol class="list-group list-group-flush" id="notes">
     {% for note in user.todo %}
         <li class="list-group-item" >
-            <h4>{{note.data}} </h4>
-            <!-- <h7>Date & Time: {{note.date}}</h7> -->
-            <br>
-            <div align=right >
-                <form method="POST" action="./update" class="form-inline" >
-                        <input type="hidden"  class="form-control" value="{{note.data}}"  name="oldnote">
-                        <input type="text"   class="form-control" value="{{note.data}}"  name="newnote">
-                        <input type="submit" class="btn btn-primary"  value="Update">
-                </form>
+            <div class="row">
+                <div class="text" >
+                    <h4>{{note.data}}</h4> 
+                </div> 
+                <div class="btn-toolbar2">
+                    <a class="btn btn-primary"  href="update">Update</a>
+                    <button type="button" class="btn btn-danger" onClick="deleteNote({{note.id}})">Delete</button>
+                </div>
             </div>
-        <div align=center >   
-        <button type="button" class="btn btn-danger" onClick="deleteNote({{note.id}})"> <!--bit of a js --go to index.js-->
-            Delete</button>
-        </div>
-        </li>
+        
+        <h6 class="list-group-item">Date & Time: {{note.date}}</h6>
+    </li>
     {% endfor %}
-</ul>
+</ol>
 
     <form method="POST">
     <textarea name="note" id="note" class="form-control"></textarea>
@@ -36,3 +35,10 @@
 
 {% endblock %}
     
+            <!-- <div align=right >
+                <form method="POST" action="./update" class="form-inline" >
+                        <input type="hidden"  class="form-control" value="{{note.data}}"  name="oldnote">
+                        <input type="text"   class="form-control" value="{{note.data}}"  name="newnote">
+                        <input type="submit" class="btn btn-primary"  value="Update">
+                </form>
+            </div> -->
